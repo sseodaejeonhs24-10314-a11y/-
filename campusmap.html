@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CampusMap | 대학생활의 숨은 정보 지도</title>
+<style>
+:root{--blue:#315efb;--ink:#17233d;--muted:#71809a;--line:#e5eaf3;--bg:#f6f8fc;--green:#16a875;--purple:#8058ee;--orange:#e58b27}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;color:var(--ink)}button,input{font:inherit}button{cursor:pointer}.layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh}.sidebar{background:#fff;border-right:1px solid var(--line);padding:25px 15px;display:flex;flex-direction:column;gap:24px}.brand{display:flex;gap:10px;align-items:center;padding:0 10px 15px}.logo{width:38px;height:38px;border-radius:12px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:22px}.brand strong{font-size:19px;letter-spacing:-.6px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.nav{display:grid;gap:7px}.nav button{border:0;background:transparent;text-align:left;border-radius:10px;padding:12px 11px;color:#52617b;display:flex;gap:11px;align-items:center;font-weight:650}.nav button.active,.nav button:hover{background:#edf2ff;color:var(--blue)}.nav .ico{font-size:18px;width:22px;text-align:center}.nav small{display:block;font-size:11px;font-weight:400;color:#8995aa;margin-top:3px}.sidebar-note{margin-top:auto;background:#f3f6ff;padding:16px;border-radius:13px;font-size:12px;line-height:1.7;color:#687794}.main{min-width:0}.topbar{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:18px;padding:0 30px;position:sticky;top:0;z-index:5}.search{flex:1;max-width:750px;position:relative}.search input{width:100%;border:1px solid #dfe5f0;border-radius:12px;padding:13px 16px 13px 43px;outline:none;background:#fbfcff}.search input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #315efb18}.search span{position:absolute;left:15px;top:12px;font-size:18px;color:#8995aa}.top-actions{margin-left:auto;display:flex;align-items:center;gap:15px}.text-btn{border:0;background:none;color:#53617a;font-weight:650}.primary{border:0;background:var(--blue);color:#fff;padding:11px 17px;border-radius:10px;font-weight:750;box-shadow:0 5px 12px #315efb22}.content{max-width:1500px;margin:auto;padding:25px 28px 35px}.hero{border-radius:18px;overflow:hidden;min-height:245px;padding:35px 38px;color:white;position:relative;background:linear-gradient(110deg,#174c91 0%,#347ac0 55%,#8cb9df 100%)}.hero:after{content:"";position:absolute;right:3%;bottom:-65px;width:340px;height:270px;border-radius:48% 48% 0 0;background:linear-gradient(145deg,#dce9f5aa,#f3f7ff44);transform:rotate(-10deg)}.hero:before{content:"✦  ✧  ✦";position:absolute;right:8%;top:30px;font-size:26px;color:#ffffff80;letter-spacing:20px}.eyebrow{font-size:14px;font-weight:700;opacity:.9}.hero h1{font-size:clamp(28px,3vw,40px);line-height:1.25;letter-spacing:-1.5px;margin:13px 0 10px;max-width:650px}.hero p{margin:0 0 22px;color:#e9f3ff}.pills{display:flex;gap:8px;flex-wrap:wrap}.pills button{border:1px solid #ffffff70;background:#ffffff25;color:white;border-radius:30px;padding:8px 14px;font-size:12px;font-weight:700}.pills button:hover{background:#fff;color:#2457a4}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:27px 2px 15px}.section-head h2{font-size:20px;letter-spacing:-.5px;margin:0}.section-head p{font-size:12px;color:var(--muted);margin:5px 0 0}.muted-link{border:0;background:none;color:var(--blue);font-size:12px;font-weight:700}.categories{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.category{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px 15px;min-height:150px;text-align:left;transition:.18s}.category:hover,.category.selected{transform:translateY(-2px);border-color:#b7c8ff;box-shadow:0 8px 24px #243d7210}.category .cat-icon{display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:#edf2ff;color:var(--blue);font-size:19px;margin-bottom:12px}.category:nth-child(2) .cat-icon{background:#e4f8ef;color:var(--green)}.category:nth-child(3) .cat-icon{background:#fff3df;color:var(--orange)}.category:nth-child(4) .cat-icon{background:#f0eaff;color:var(--purple)}.category:nth-child(5) .cat-icon{background:#ffe9f0;color:#d94f84}.category:nth-child(6) .cat-icon{background:#e1f8fb;color:#1498ad}.category strong{font-size:14px;display:block}.category p{font-size:11px;color:var(--muted);line-height:1.6;margin:7px 0 0}.columns{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(240px,.9fr) minmax(230px,.8fr);gap:16px;margin-top:18px}.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:17px;min-width:0}.panel-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.panel-title h3{margin:0;font-size:16px}.tabs{display:flex;gap:5px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:4px}.tabs button{border:0;background:transparent;border-radius:8px;padding:7px 10px;font-size:11px;color:#7c8aa2}.tabs button.active{background:#edf2ff;color:var(--blue);font-weight:750}.article{display:grid;grid-template-columns:1fr 62px;gap:10px;padding:13px 0;border-bottom:1px solid #edf0f6;cursor:pointer}.article:last-child{border-bottom:0}.article:hover h4{color:var(--blue)}.tag{font-size:10px;border-radius:6px;padding:4px 6px;background:#edf2ff;color:var(--blue);font-weight:800;display:inline-block;margin-bottom:6px}.tag.green{background:#e5f8ef;color:#138a60}.tag.orange{background:#fff2df;color:#b46a08}.tag.purple{background:#f0eaff;color:#7851d8}.tag.pink{background:#ffe9f0;color:#c63e76}.article h4{font-size:12px;line-height:1.5;margin:0 0 4px}.article p{font-size:11px;color:var(--muted);line-height:1.55;margin:0}.meta{font-size:10px;color:#98a3b6;margin-top:7px}.thumb{width:62px;height:62px;border-radius:10px;background:linear-gradient(135deg,#d9e8f9,#f5e9d8);display:grid;place-items:center;font-size:25px;align-self:center}.recommend{display:grid;grid-template-columns:65px 1fr;gap:11px;padding:12px 0;border-bottom:1px solid #edf0f6;cursor:pointer}.recommend:last-child{border-bottom:0}.recommend .thumb{width:65px;height:65px}.recommend h4{font-size:12px;line-height:1.5;margin:0 0 5px}.recommend p{font-size:11px;line-height:1.5;color:var(--muted);margin:0}.likes{font-size:10px;color:#8d99ad;margin-top:6px}.links{display:grid;gap:2px}.quick-link{display:flex;align-items:center;gap:9px;padding:10px 3px;border-bottom:1px solid #f0f2f7;color:#586781;font-size:11px;text-decoration:none}.quick-link span:first-child{width:23px;height:23px;display:grid;place-items:center;background:#f0f3f9;border-radius:7px}.quick-link span:last-child{margin-left:auto;color:#9aa6b9}.join-card{margin-top:15px;padding:17px;border-radius:14px;background:linear-gradient(135deg,#f1efff,#f8f7ff);border:1px solid #ebe6ff}.join-card h3{font-size:14px;margin:0 0 7px}.join-card p{font-size:11px;line-height:1.7;color:#7b82a1;margin:0 0 13px}.join-card button{width:100%}.footer{padding:22px 30px;border-top:1px solid var(--line);background:#fff;color:#8792a7;font-size:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.empty{padding:35px 10px;text-align:center;color:var(--muted);font-size:13px}.modal-backdrop{position:fixed;inset:0;background:#14213a66;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.modal-backdrop.show{display:flex}.modal{background:#fff;border-radius:18px;max-width:540px;width:100%;padding:25px;box-shadow:0 20px 80px #0c1b382e;max-height:85vh;overflow:auto}.modal-head{display:flex;justify-content:space-between;gap:15px;align-items:start}.modal h2{font-size:22px;line-height:1.4;margin:10px 0}.modal p{color:#66758e;line-height:1.8;font-size:14px}.close{border:0;background:#f1f4f9;border-radius:9px;width:34px;height:34px;font-size:20px}.modal-actions{display:flex;gap:9px;margin-top:20px}.outline{background:white;border:1px solid var(--line);color:#52617b;border-radius:10px;padding:11px 14px;font-weight:700}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#17233d;color:#fff;padding:12px 18px;border-radius:11px;font-size:13px;display:none;z-index:20}.toast.show{display:block}
+@media(max-width:1200px){.categories{grid-template-columns:repeat(3,1fr)}.columns{grid-template-columns:minmax(0,1.5fr) minmax(250px,1fr)}.right-col{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:15px}.join-card{margin-top:0}}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.sidebar{display:none}.topbar{height:65px;padding:0 14px}.top-actions{gap:8px}.top-actions .text-btn:first-child{display:none}.content{padding:17px 14px}.hero{padding:27px 23px;min-height:250px}.hero:after{right:-120px;opacity:.5}.categories{grid-template-columns:repeat(2,minmax(0,1fr))}.columns{grid-template-columns:1fr}.right-col{grid-column:auto;display:block}.join-card{margin-top:15px}.footer{padding:18px 15px}.top-actions .primary{padding:10px 12px}.search input{padding-right:8px;font-size:12px}}
+@media(max-width:420px){.categories{gap:8px}.category{padding:13px;min-height:145px}.hero h1{font-size:28px}.hero p{font-size:13px}.topbar{gap:9px}.top-actions .text-btn{display:none}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">✦</div><div><strong>CampusMap</strong><small>대학 생활, 더 넓은 세상으로</small></div></div>
+  <nav class="nav" aria-label="주 메뉴">
+    <button class="active" data-nav="전체"><span class="ico">⌂</span><span>홈<small>캠퍼스맵 둘러보기</small></span></button>
+    <button data-nav="공식 정보"><span class="ico">▣</span><span>공식 정보<small>학교 공지, 학사일정, 행정업무</small></span></button>
+    <button data-nav="학술자료"><span class="ico">▤</span><span>학술자료<small>논문, 리포트, 학술DB, 스터디</small></span></button>
+    <button data-nav="꿀팁 & 노하우"><span class="ico">♧</span><span>꿀팁 & 노하우<small>선배들의 경험, 실전 노하우</small></span></button>
+    <button data-nav="프로젝트"><span class="ico">▱</span><span>프로젝트 & 대외활동<small>팀원 모집, 공모전, 프로젝트</small></span></button>
+    <button data-nav="취업"><span class="ico">▣</span><span>취업 & 진로<small>채용정보, 자소서, 면접, 커리어</small></span></button>
+    <button data-nav="커뮤니티"><span class="ico">☏</span><span>커뮤니티<small>질문하기, 자유게시판</small></span></button>
+  </nav>
+  <div class="sidebar-note">🌱 <strong>지금의 작은 탐색이</strong><br>더 나은 내일을 만듭니다.<br><br>— CampusMap —</div>
+</aside>
+<main class="main">
+<header class="topbar">
+  <div class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="학술자료, 프로젝트, 취업 정보 등 원하는 내용을 검색해보세요..."></div>
+  <div class="top-actions"><button class="text-btn" id="savedBtn">♡ 저장한 글</button><button class="text-btn" id="loginBtn">로그인</button><button class="primary" id="joinBtn">회원가입</button></div>
+</header>
+<div class="content">
+  <section class="hero">
+    <div class="eyebrow">대학생을 위한 모든 것</div>
+    <h1>공식적인 정보부터<br>소수만 아는 꿀팁까지!</h1>
+    <p>캠퍼스맵과 함께라면 대학생활이 더 스마트해집니다.</p>
+    <div class="pills"><button data-filter="공식 정보">학사정보</button><button data-filter="학술자료">학술자료</button><button data-filter="꿀팁 & 노하우">꿀팁</button><button data-filter="프로젝트">프로젝트</button><button data-filter="취업">취업</button></div>
+  </section>
+  <div class="section-head"><div><h2>무엇을 찾고 있나요?</h2><p>필요한 정보를 분야별로 빠르게 찾아보세요.</p></div></div>
+  <section class="categories">
+    <button class="category" data-filter="공식 정보"><span class="cat-icon">⌂</span><strong>공식 정보</strong><p>학교 공지사항, 학사일정,<br>장학금, 행정업무 등</p></button>
+    <button class="category" data-filter="학술자료"><span class="cat-icon">▤</span><strong>학술자료</strong><p>논문, 리포트, 학술DB,<br>연구자료, 스터디 자료</p></button>
+    <button class="category" data-filter="꿀팁 & 노하우"><span class="cat-icon">♧</span><strong>꿀팁 & 노하우</strong><p>선배들의 경험, 과제 팁,<br>생활 노하우, 꿀정보</p></button>
+    <button class="category" data-filter="프로젝트"><span class="cat-icon">✣</span><strong>프로젝트 & 대외활동</strong><p>팀원 모집, 공모전,<br>프로젝트, 인턴십</p></button>
+    <button class="category" data-filter="취업"><span class="cat-icon">▣</span><strong>취업 & 진로</strong><p>채용정보, 자소서, 면접,<br>취업 준비, 커리어 설계</p></button>
+    <button class="category" data-filter="커뮤니티"><span class="cat-icon">☏</span><strong>커뮤니티</strong><p>질문하기, 자유게시판,<br>동아리, 스터디</p></button>
+  </section>
+  <section class="columns">
+    <div class="panel">
+      <div class="panel-title"><h3 id="feedTitle">지금 가장 핫한 콘텐츠 🔥</h3><button class="muted-link" id="resetBtn">전체 보기 ↗</button></div>
+      <div class="tabs" id="tabs"><button class="active" data-tab="전체">전체</button><button data-tab="학술자료">학술자료</button><button data-tab="꿀팁 & 노하우">꿀팁 & 노하우</button><button data-tab="프로젝트">프로젝트</button><button data-tab="취업">취업</button><button data-tab="커뮤니티">커뮤니티</button></div>
+      <div id="articleList"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title"><h3>추천 콘텐츠</h3><button class="muted-link" id="recommendMore">더보기 →</button></div>
+      <div id="recommendList"></div>
+    </div>
+    <div class="right-col">
+      <div class="panel">
+        <div class="panel-title"><h3>▣ 대학생활 필수 링크</h3></div>
+        <div class="links">
+          <a class="quick-link" href="https://www.ac.kr" target="_blank" rel="noopener"><span>▣</span>대학 홈페이지 찾기 <span>↗</span></a>
+          <a class="quick-link" href="https://www.scholarship.or.kr" target="_blank" rel="noopener"><span>▧</span>장학금 정보 확인 <span>↗</span></a>
+          <a class="quick-link" href="https://www.riss.kr" target="_blank" rel="noopener"><span>▤</span>RISS 학술연구정보서비스 <span>↗</span></a>
+          <a class="quick-link" href="https://scholar.google.com" target="_blank" rel="noopener"><span>⌕</span>Google Scholar <span>↗</span></a>
+          <a class="quick-link" href="https://www.work.go.kr" target="_blank" rel="noopener"><span>▣</span>고용24 취업지원 <span>↗</span></a>
+          <a class="quick-link" href="https://www.k-startup.go.kr" target="_blank" rel="noopener"><span>✣</span>K-Startup 창업지원 <span>↗</span></a>
+        </div>
+      </div>
+      <div class="join-card"><h3>🚀 지금 시작해보세요!</h3><p>회원가입하고 더 많은 정보와<br>커뮤니티를 이용해보세요.</p><button class="primary" id="joinBtn2">회원가입하기 →</button></div>
+    </div>
+  </section>
+</div>
+<footer class="footer"><span>✦ CampusMap</span><span>이용약관　　개인정보처리방침　　고객센터</span><span>“대학생활의 모든 순간, 캠퍼스맵이 함께합니다.”</span></footer>
+</main>
+</div>
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-head"><div><span class="tag" id="modalTag">정보</span><h2 id="modalTitle">콘텐츠 제목</h2></div><button class="close" id="closeModal" aria-label="닫기">×</button></div><p id="modalBody"></p><div class="modal-actions"><button class="primary" id="saveArticle">♡ 저장하기</button><button class="outline" id="shareArticle">링크 복사</button><button class="outline" id="closeModal2">닫기</button></div></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const articles=[
+{id:1,cat:"학술자료",tag:"학술자료",tone:"",icon:"📚",title:"[무료] 국내 학술DB 이용 방법 총정리 (RISS, DBpia, KISS 등)",desc:"대학원생, 연구자뿐 아니라 과제하는 대학생도 꼭 알아야 할 학술자료 찾는 법!",meta:"김지민 · 2시간 전 · 조회 1,243",body:"논문을 찾을 때는 RISS와 Google Scholar에서 키워드를 먼저 검색하고, 학교 도서관의 전자자료 메뉴에서 구독 중인 DBpia·KISS 접근 방법을 확인해 보세요. 원문 이용 조건과 인용 규칙을 확인하고, 출처를 꼼꼼히 기록하는 습관이 중요합니다.",likes:23},
+{id:2,cat:"꿀팁 & 노하우",tag:"꿀팁 & 노하우",tone:"orange",icon:"✍️",title:"교수님께 좋은 인상을 주는 레포트 작성법 (실전 경험담)",desc:"실제로 A+ 받은 선배의 대학별 레포트 주제 선정부터 참고문헌까지",meta:"박서연 · 4시간 전 · 조회 2,315",body:"과제의 평가 기준과 제출 형식을 먼저 확인하세요. 서론에는 질문과 주장을 명확히 쓰고, 본론은 근거와 출처를 중심으로 구성한 뒤 결론에서 핵심을 요약하면 좋습니다. 제출 전에는 인용 표기, 참고문헌, 맞춤법을 확인하세요.",likes:12},
+{id:3,cat:"프로젝트",tag:"프로젝트",tone:"purple",icon:"💻",title:"2026 상반기 대학생 AI 프로젝트 팀원 모집 (비대면 가능)",desc:"AI 기반 웹서비스 기획/개발 프로젝트 함께하실 분 구합니다!",meta:"이준호 · 6시간 전 · 조회 987",body:"아이디어를 실제 결과물로 만들고 싶은 대학생을 위한 팀 프로젝트 모집 예시입니다. 기획·디자인·개발·리서치 역할을 나누고, 주 1회 온라인 회의와 GitHub 또는 Notion을 활용한 협업을 권장합니다. 실제 모집 여부와 일정은 주최자에게 확인하세요.",likes:8},
+{id:4,cat:"취업",tag:"취업",tone:"pink",icon:"📄",title:"대기업 자소서 항목별 합격 예시 모음 (최신 ver.)",desc:"실제 합격한 지원자의 자소서 분석과 항목별 작성 팁까지!",meta:"최지은 · 8시간 전 · 조회 3,876",body:"자기소개서는 직무와 연결되는 경험을 중심으로 작성하세요. 상황-과제-행동-결과 구조로 구체적인 행동과 수치를 제시하고, 지원 회사와 직무에 맞게 내용을 수정하는 것이 좋습니다. 예시는 참고용으로만 사용하고 본인의 경험을 바탕으로 작성하세요.",likes:15},
+{id:5,cat:"공식 정보",tag:"공식 정보",tone:"green",icon:"📅",title:"놓치기 쉬운 학사 일정·장학금 공지 확인하는 방법",desc:"학교 포털 알림과 장학재단 공지를 한 번에 챙기는 체크리스트",meta:"캠퍼스 에디터 · 어제 · 조회 1,802",body:"학사 일정과 장학금 신청 기간은 학교·학과·학년별로 다를 수 있습니다. 학교 포털과 학생지원 부서 공지를 기준으로 확인하고, 한국장학재단 등 공식 기관의 자격·기간·제출서류를 함께 확인하세요. 마감일은 개인 캘린더에 등록해 두면 좋습니다.",likes:19},
+{id:6,cat:"커뮤니티",tag:"커뮤니티",tone:"",icon:"💬",title:"시험기간 같이 공부할 온라인 스터디원을 찾아요",desc:"주 2회 인증 방식으로 꾸준히 공부할 분들 모집합니다.",meta:"익명 · 1일 전 · 조회 642",body:"스터디를 만들 때는 목표, 주간 일정, 참여 방식, 연락 채널을 먼저 합의하세요. 처음부터 부담을 크게 잡기보다 주 2회처럼 지킬 수 있는 약속으로 시작하고, 개인정보나 금전 요구에는 주의하세요.",likes:6},
+{id:7,cat:"학술자료",tag:"학술자료",tone:"",icon:"🔎",title:"논문 검색 시간을 절반으로 줄이는 키워드 조합법",desc:"동의어·영문 키워드·인용 논문으로 자료 탐색 범위 넓히기",meta:"리서치 노트 · 2일 전 · 조회 1,098",body:"핵심 개념을 한국어와 영어로 각각 정리한 다음 AND로 주제를 좁히고 OR로 동의어를 확장해 보세요. 좋은 논문을 찾았다면 참고문헌과 해당 논문을 인용한 후속 연구도 확인하면 관련 문헌을 빠르게 찾을 수 있습니다.",likes:17},
+{id:8,cat:"프로젝트",tag:"프로젝트",tone:"purple",icon:"🏆",title:"대외활동 경험을 포트폴리오로 바꾸는 5단계",desc:"참여 사실보다 문제 해결 과정과 결과를 보여주는 정리법",meta:"커리어랩 · 3일 전 · 조회 1,430",body:"프로젝트 목표와 본인 역할, 해결해야 했던 문제, 실행한 행동, 결과를 한 페이지에 정리하세요. 수치로 표현할 수 있는 성과가 있다면 근거와 함께 기록하고, 공개 가능한 산출물 링크를 덧붙이면 포트폴리오의 설득력이 높아집니다.",likes:21}
+];
+let activeFilter="전체", searchTerm="", saved=new Set(), currentArticle=null;
+const $=s=>document.querySelector(s);
+const articleList=$("#articleList"), recommendList=$("#recommendList");
+function filtered(){return articles.filter(a=>(activeFilter==="전체"||a.cat===activeFilter)&&(`${a.title} ${a.desc} ${a.cat} ${a.tag}`).toLowerCase().includes(searchTerm.toLowerCase())&&( $("#savedBtn").dataset.mode!=="saved"||saved.has(a.id)));}
+function render(){
+ const list=filtered();
+ $("#feedTitle").textContent=searchTerm?`검색 결과 (${list.length})`:($("#savedBtn").dataset.mode==="saved"?"저장한 콘텐츠":"지금 가장 핫한 콘텐츠 🔥");
+ articleList.innerHTML=list.length?list.map(a=>`<article class="article" data-id="${a.id}" tabindex="0"><div><span class="tag ${a.tone}">${a.tag}</span><h4>${a.title}</h4><p>${a.desc}</p><div class="meta">${a.meta} ${saved.has(a.id)?" · ♡ 저장됨":""}</div></div><div class="thumb">${a.icon}</div></article>`).join(""):`<div class="empty">검색 결과가 없어요.<br>다른 키워드나 카테고리를 선택해 보세요.</div>`;
+ document.querySelectorAll(".article").forEach(el=>{el.addEventListener("click",()=>openArticle(+el.dataset.id));el.addEventListener("keydown",e=>{if(e.key==="Enter")openArticle(+el.dataset.id)})});
+ const recs=[articles[0],articles[1],articles[2],articles[3]];
+ recommendList.innerHTML=recs.map(a=>`<div class="recommend" data-id="${a.id}"><div class="thumb">${a.icon}</div><div><span class="tag ${a.tone}">${a.tag}</span><h4>${a.title}</h4><p>${a.desc}</p><div class="likes">♡ ${a.likes} · ${saved.has(a.id)?"저장됨":"추천 콘텐츠"}</div></div></div>`).join("");
+ document.querySelectorAll(".recommend").forEach(el=>el.addEventListener("click",()=>openArticle(+el.dataset.id)));
+ document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===activeFilter));
+ document.querySelectorAll(".category").forEach(b=>b.classList.toggle("selected",b.dataset.filter===activeFilter));
+ document.querySelectorAll("[data-nav]").forEach(b=>b.classList.toggle("active",b.dataset.nav===activeFilter||(activeFilter==="전체"&&b.dataset.nav==="전체")));
+}
+function setFilter(cat){activeFilter=cat;$("#savedBtn").dataset.mode="";render();window.scrollTo({top:0,behavior:"smooth"});}
+function openArticle(id){currentArticle=articles.find(a=>a.id===id);if(!currentArticle)return;$("#modalTag").textContent=currentArticle.tag;$("#modalTag").className="tag "+currentArticle.tone;$("#modalTitle").textContent=currentArticle.title;$("#modalBody").textContent=currentArticle.body;$("#saveArticle").textContent=saved.has(id)?"♥ 저장 취소":"♡ 저장하기";$("#modalBackdrop").classList.add("show");}
+function closeModal(){$("#modalBackdrop").classList.remove("show")}
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}
+document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>setFilter(b.dataset.filter)));
+document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>setFilter(b.dataset.tab)));
+document.querySelectorAll("[data-nav]").forEach(b=>b.addEventListener("click",()=>setFilter(b.dataset.nav==="전체"?"전체":b.dataset.nav)));
+$("#searchInput").addEventListener("input",e=>{searchTerm=e.target.value.trim();$("#savedBtn").dataset.mode="";render()});
+$("#resetBtn").addEventListener("click",()=>{searchTerm="";$("#searchInput").value="";$("#savedBtn").dataset.mode="";setFilter("전체")});
+$("#savedBtn").addEventListener("click",()=>{$("#savedBtn").dataset.mode=$("#savedBtn").dataset.mode==="saved"?"":"saved";activeFilter="전체";render()});
+$("#recommendMore").addEventListener("click",()=>{setFilter("학술자료");toast("추천 학술자료를 모아봤어요.")});
+$("#closeModal").addEventListener("click",closeModal);$("#closeModal2").addEventListener("click",closeModal);
+$("#modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")closeModal()});
+$("#saveArticle").addEventListener("click",()=>{if(!currentArticle)return;if(saved.has(currentArticle.id))saved.delete(currentArticle.id);else saved.add(currentArticle.id);$("#saveArticle").textContent=saved.has(currentArticle.id)?"♥ 저장 취소":"♡ 저장하기";render();toast(saved.has(currentArticle.id)?"저장한 글에 추가했어요.":"저장을 취소했어요.")});
+$("#shareArticle").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(location.href+"#article-"+currentArticle.id);toast("페이지 링크를 복사했어요.")}catch(e){toast("브라우저에서 주소를 직접 복사해 주세요.")}});
+["loginBtn","joinBtn","joinBtn2"].forEach(id=>$("#"+id).addEventListener("click",()=>toast("데모 페이지입니다. 로그인·회원가입 기능은 서버 연결 후 사용할 수 있어요.")));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+render();
+</script>
+</body>
+</html>
